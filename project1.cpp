@@ -80,6 +80,31 @@ void updateTask() {
     cout << "❌ Task with ID " << id << " not found.\n";
 }
 
+// Function to search a task
+void searchTask() {
+    string title;
+    cout << "📰 Enter the title of task to be searched: ";
+    cin >> title;
+    cin.ignore();
+
+    bool found = false;
+    for (auto& task : tasks) {
+        if (task.title == title) {
+            cout << "-----------------------------\n";
+            cout << "🔢 ID: " << task.id << "\n";
+            cout << "📝 Title: " << task.title << "\n";
+            cout << "📄 Description: " << task.description << "\n";
+            cout << "-----------------------------\n";
+            found = true;
+            break; 
+        }
+    }
+
+    if (!found) {
+        cout << "❌ Task titled \"" << title << "\" not found.\n";
+    }
+}
+
 // Function to delete a task
 void deleteTask() {
     int id;
@@ -87,13 +112,14 @@ void deleteTask() {
     cin >> id;
     cin.ignore();
 
-    for (auto it = tasks.begin(); it != tasks.end(); ++it) {
-        if (it->id == id) {
+    for (int i = 0; i < tasks.size(); ++i) {
+        if (tasks[i].id == id) {
             char confirm;
             cout << "⚠️ Are you sure you want to delete this task? (y/n): ";
             cin >> confirm;
+
             if (confirm == 'y' || confirm == 'Y') {
-                tasks.erase(it);
+                tasks.erase(tasks.begin() + i);  
                 cout << "🗑️ Task deleted successfully!\n";
             } else {
                 cout << "❌ Deletion cancelled.\n";
@@ -104,6 +130,7 @@ void deleteTask() {
 
     cout << "❌ Task with ID " << id << " not found.\n";
 }
+
 
 // Welcome banner
 void showWelcome() {
@@ -123,8 +150,9 @@ int main() {
         cout << "1️⃣  Create Task\n";
         cout << "2️⃣  View Tasks\n";
         cout << "3️⃣  Update Task\n";
-        cout << "4️⃣  Delete Task\n";
-        cout << "5️⃣  Exit\n";
+        cout << "4️⃣  Search Task\n";
+        cout << "5️⃣  Delete Task\n";
+        cout << "6️⃣ Exit\n";
         cout << "Choose an option: ";
         cin >> choice;
 
@@ -139,15 +167,18 @@ int main() {
                 updateTask();
                 break;
             case 4:
-                deleteTask();
+                searchTask();
                 break;
             case 5:
+                deleteTask();
+                break;
+            case 6:
                 cout << "👋 Exiting Task Manager. Have a great day!\n";
                 break;
             default:
                 cout << "⚠️ Invalid choice! Please try again.\n";
         }
-    } while (choice != 5);
+    } while (choice != 6);
 
     return 0;
 }
