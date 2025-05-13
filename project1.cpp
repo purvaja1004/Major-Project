@@ -16,12 +16,6 @@ struct Task {
 vector<Task> tasks;
 int nextId = 1;
 
-// Utility function to pause screen
-void pause() {
-    cout << "\n🔃 Press Enter to continue...";
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-    cin.get();
-}
 
 // Function to create a task
 void createTask() {
@@ -114,9 +108,9 @@ void deleteTask() {
 // Welcome banner
 void showWelcome() {
     cout << "=====================================\n";
-    cout << "        🗂️ TASK MANAGER 3000 🗂️      \n";
+    cout << "        📚️ TASK MANAGER 📚️      \n";
     cout << "=====================================\n";
-    cout << "Manage your tasks with confidence! 💼\n";
+    cout << "Efficiently manage your tasks and streamline your workflow.\n This Task Manager allows you to create, view, update, and delete tasks with ease. Designed to support productivity and clarity in task tracking. 💼\n";
 }
 
 // Main function
@@ -137,19 +131,15 @@ int main() {
         switch (choice) {
             case 1:
                 createTask();
-                pause();
                 break;
             case 2:
                 displayTasks();
-                pause();
                 break;
             case 3:
                 updateTask();
-                pause();
                 break;
             case 4:
                 deleteTask();
-                pause();
                 break;
             case 5:
                 cout << "👋 Exiting Task Manager. Have a great day!\n";
@@ -161,4 +151,3 @@ int main() {
 
     return 0;
 }
-
